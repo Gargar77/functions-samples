@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cloud Functions for Firebase with Stripe Payments</title>
+    <title>Donations</title>
     <link
       type="text/css"
       rel="stylesheet"
@@ -12,6 +12,10 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./style.css"
     />
   </head>
   <style>
@@ -24,7 +28,7 @@
     }
   </style>
   <body>
-    <h1>Cloud Functions for Firebase with Stripe Payments</h1>
+    <h1>Credit Card donation</h1>
     <section id="firebaseui-auth-container"></section>
     <div id="loader">Loading &hellip;</div>
     <section id="content" style="display: none;">
@@ -35,13 +39,6 @@
         <h2>Payment Methods</h2>
         <details id="add-new-card">
           <summary>Add new</summary>
-          <p>
-            Use any of the
-            <a href="https://stripe.com/docs/testing#international-cards"
-              >Stripe test cards</a
-            >
-            for this demo!
-          </p>
           <form id="payment-method-form">
             <label>
               Cardholder name
@@ -94,11 +91,6 @@
     </section>
     <hr />
     <footer>
-      <a
-        href="https://github.com/firebase/functions-samples/tree/master/stripe"
-      >
-        View source code
-      </a>
     </footer>
 
     <!-- Import and configure the Firebase SDK -->

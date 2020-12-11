@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const STRIPE_PUBLISHABLE_KEY = '<YOUR STRIPE PUBLISHABLE KEY>';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51HvW6uHy38LlQoOl036Nc4MMLnOVxJmkAL0LxRe0Oqj5TyC9uBnPNOidnL6YEufmNDWcST8tc9SsnC81bAFtNe2X00zFJaOAPC';
 let currentUser = {};
 let customerData = {};
 
@@ -154,18 +154,18 @@ function startDataListeners() {
           )}`;
         } else if (payment.status === 'succeeded') {
           const card = payment.charges.data[0].payment_method_details.card;
-          content = `✅ Payment for ${formatAmount(
+          content = `✅ Donation of ${formatAmount(
             payment.amount,
             payment.currency
           )} on ${card.brand} card •••• ${card.last4}.`;
         } else if (payment.status === 'requires_action') {
-          content = `🚨 Payment for ${formatAmount(
+          content = `🚨 Donation of ${formatAmount(
             payment.amount,
             payment.currency
           )} ${payment.status}`;
           handleCardAction(payment, doc.id);
         } else {
-          content = `⚠️ Payment for ${formatAmount(
+          content = `⚠️ Donation of ${formatAmount(
             payment.amount,
             payment.currency
           )} ${payment.status}`;
