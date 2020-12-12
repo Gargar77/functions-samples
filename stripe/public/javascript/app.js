@@ -1,3 +1,5 @@
+const { URLSearchParams } = require("url");
+
 /**
  * Copyright 2020 Google Inc. All Rights Reserved.
  *
@@ -16,6 +18,10 @@
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_51HvW6uHy38LlQoOl036Nc4MMLnOVxJmkAL0LxRe0Oqj5TyC9uBnPNOidnL6YEufmNDWcST8tc9SsnC81bAFtNe2X00zFJaOAPC';
 let currentUser = {};
 let customerData = {};
+
+/**
+ * Initialize cloud functions
+ */
 
 /**
  * Firebase auth configuration
@@ -324,3 +330,35 @@ async function handleCardAction(payment, docId) {
     .doc(docId)
     .set(payment, { merge: true });
 }
+
+// [send customer to checkout form (subcriptions only)]
+
+const createCheckoutSession = function(priceId) {
+  return fetch("https://aid2many-805f3.web.app/createSession", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      priceId: priceId
+    })
+  }).then(function(result) {
+    return result.json();
+  });
+};
+
+document
+  .getElementById("subscribe")
+  .addEventListener("click", function(evt) {
+    createCheckoutSession("price_1Hx0pCHy38LlQoOlWTg1PLaW").then(function(data) {
+      // Call Stripe.js method to redirect to the new Checkout page
+      console.log(data);
+      stripe
+        .redirectToCheckout({
+          sessionId: data.sessionId
+        })
+        .then(handleResult);
+    });
+  });
+
+  //[send customer to billing portal]
